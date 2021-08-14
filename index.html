@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="Description" content="Enter your description here"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        <link rel="stylesheet" href="css/main.css">
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.8.2.js"></script>
+        <script src="js/main.js" defer></script>
+        <title>Weather App</title>
+    </head>
+    <body>
+        <div class="container my-5">
+            <header>
+                <div class="col-12 d-flex justify-content-center mb-4"><h1>Weather App</h1></div>
+            </header>
+            <!-- Creating user input form and validating entry -->
+            <form name="infoData" id="infoDataForm">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-12 col-md-2 mx-2 py-2 py-md-0">
+                        <input class="form-control" type="text" name="post" id="post" placeholder="Zip/Postal Code" aria-label="default input example">
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <select class="form-select" name="countrycode" id="country-code-field" aria-label="Default select example">
+                            <option value=""> Select Country</option>
+                            <option value="US" id="US">United States(USA)</option>
+                            <option value="UM" id="UM">United States Minor Outlying Islands</option>
+                            <option value="GB" id="GB">United Kingdom(UK)</option>
+                            <option value="AF" id="AF">Afghanistan</option>
+                            <option value="AX" id="AX">Åland Islands</option>
+                            <option value="AL" id="AL">Albania</option>
+                            <option value="DZ" id="DZ">Algeria</option>
+                            <option value="AS" id="AS">American Samoa</option>
+                            <option value="AD" id="AD">Andorra</option>
+                            <option value="AO" id="AO">Angola</option>
+                            <option value="AI" id="AI">Anguilla</option>
+                            <option value="AQ" id="AQ">Antarctica</option>
+                            <option value="AG" id="AG">Antigua and Barbuda</option>
+                            <option value="AR" id="AR">Argentina</option>
+                            <option value="AM" id="AM">Armenia</option>
+                            <option value="AW" id="AW">Aruba</option>
+                            <option value="AU" id="AU">Australia</option>
+                            <option value="AT" id="AT">Austria</option>
+                            <option value="AZ" id="AZ">Azerbaijan</option>
+                            <option value="BS" id="BS">Bahamas</option>
+                            <option value="BH" id="BH">Bahrain</option>
+                            <option value="BD" id="BD">Bangladesh</option>
+                            <option value="BB" id="BB">Barbados</option>
+                            <option value="BY" id="BY">Belarus</option>
+                            <option value="BE" id="BE">Belgium</option>
+                            <option value="BZ" id="BZ">Belize</option>
+                            <option value="BJ" id="BJ">Benin</option>
+                            <option value="BM" id="BM">Bermuda</option>
+                            <option value="BT" id="BT">Bhutan</option>
+                            <option value="BO" id="BO">Bolivia, Plurinational State of</option>
+                            <option value="BQ" id="BQ">Bonaire, Sint Eustatius and Saba</option>
+                            <option value="BA" id="BA">Bosnia and Herzegovina</option>
+                            <option value="BW" id="BW">Botswana</option>
+                            <option value="BV" id="BV">Bouvet Island</option>
+                            <option value="BR" id="BR">Brazil</option>
+                            <option value="IO" id="IO">British Indian Ocean Territory</option>
+                            <option value="BN" id="BN">Brunei Darussalam</option>
+                            <option value="BG" id="BG">Bulgaria</option>
+                            <option value="BF" id="BF">Burkina Faso</option>
+                            <option value="BI" id="BI">Burundi</option>
+                            <option value="KH" id="KH">Cambodia</option>
+                            <option value="CM" id="CM">Cameroon</option>
+                            <option value="CA" id="CA">Canada</option>
+                            <option value="CV" id="CV">Cape Verde</option>
+                            <option value="KY" id="KY">Cayman Islands</option>
+                            <option value="CF" id="CF">Central African Republic</option>
+                            <option value="TD" id="TD">Chad</option>
+                            <option value="CL" id="CL">Chile</option>
+                            <option value="CN" id="CN">China</option>
+                            <option value="CX" id="CX">Christmas Island</option>
+                            <option value="CC" id="CC">Cocos (Keeling) Islands</option>
+                            <option value="CO" id="CO">Colombia</option>
+                            <option value="KM" id="KM">Comoros</option>
+                            <option value="CG" id="CG">Congo</option>
+                            <option value="CD" id="CD">Congo, The Democratic Republic of the</option>
+                            <option value="CK" id="CK">Cook Islands</option>
+                            <option value="CR" id="CR">Costa Rica</option>
+                            <option value="CI" id="CI">Côte d'Ivoire</option>
+                            <option value="HR" id="HR">Croatia</option>
+                            <option value="CU" id="CU">Cuba</option>
+                            <option value="CW" id="CW">Curaçao</option>
+                            <option value="CY" id="CY">Cyprus</option>
+                            <option value="CZ" id="CZ">Czech Republic</option>
+                            <option value="DK" id="DK">Denmark</option>
+                            <option value="DJ" id="DJ">Djibouti</option>
+                            <option value="DM" id="DM">Dominica</option>
+                            <option value="DO" id="DO">Dominican Republic</option>
+                            <option value="EC" id="EC">Ecuador</option>
+                            <option value="EG" id="EG">Egypt</option>
+                            <option value="SV" id="SV">El Salvador</option>
+                            <option value="GQ" id="GQ">Equatorial Guinea</option>
+                            <option value="ER" id="ER">Eritrea</option>
+                            <option value="EE" id="EE">Estonia</option>
+                            <option value="ET" id="ET">Ethiopia</option>
+                            <option value="FK" id="FK">Falkland Islands (Malvinas)</option>
+                            <option value="FO" id="FO">Faroe Islands</option>
+                            <option value="FJ" id="FJ">Fiji</option>
+                            <option value="FI" id="FI">Finland</option>
+                            <option value="FR" id="FR">France</option>
+                            <option value="GF" id="GF">French Guiana</option>
+                            <option value="PF" id="PF">French Polynesia</option>
+                            <option value="TF" id="TF">French Southern Territories</option>
+                            <option value="GA" id="GA">Gabon</option>
+                            <option value="GM" id="GM">Gambia</option>
+                            <option value="GE" id="GE">Georgia</option>
+                            <option value="DE" id="DE">Germany</option>
+                            <option value="GH" id="GH">Ghana</option>
+                            <option value="GI" id="GI">Gibraltar</option>
+                            <option value="GR" id="GR">Greece</option>
+                            <option value="GL" id="GL">Greenland</option>
+                            <option value="GD" id="GD">Grenada</option>
+                            <option value="GP" id="GP">Guadeloupe</option>
+                            <option value="GU" id="GU">Guam</option>
+                            <option value="GT" id="GT">Guatemala</option>
+                            <option value="GG" id="GG">Guernsey</option>
+                            <option value="GN" id="GN">Guinea</option>
+                            <option value="GW" id="GW">Guinea-Bissau</option>
+                            <option value="GY" id="GY">Guyana</option>
+                            <option value="HT" id="HT">Haiti</option>
+                            <option value="HM" id="HM">Heard Island and McDonald Islands</option>
+                            <option value="VA" id="VA">Holy See (Vatican City State)</option>
+                            <option value="HN" id="HN">Honduras</option>
+                            <option value="HK" id="HK">Hong Kong</option>
+                            <option value="HU" id="HU">Hungary</option>
+                            <option value="IS" id="IS">Iceland</option>
+                            <option value="IN" id="IN">India</option>
+                            <option value="ID" id="ID">Indonesia</option>
+                            <option value="IR" id="IR">Iran, Islamic Republic of</option>
+                            <option value="IQ" id="IQ">Iraq</option>
+                            <option value="IE" id="IE">Ireland</option>
+                            <option value="IM" id="IM">Isle of Man</option>
+                            <option value="IL" id="IL">Israel</option>
+                            <option value="IT" id="IT">Italy</option>
+                            <option value="JM" id="JM">Jamaica</option>
+                            <option value="JP" id="JP">Japan</option>
+                            <option value="JE" id="JE">Jersey</option>
+                            <option value="JO" id="JO">Jordan</option>
+                            <option value="KZ" id="KZ">Kazakhstan</option>
+                            <option value="KE" id="KE">Kenya</option>
+                            <option value="KI" id="KI">Kiribati</option>
+                            <option value="KP" id="KP">Korea, Democratic People's Republic of</option>
+                            <option value="KR" id="KR">Korea, Republic of</option>
+                            <option value="KW" id="KW">Kuwait</option>
+                            <option value="KG" id="KG">Kyrgyzstan</option>
+                            <option value="LA" id="LA">Lao People's Democratic Republic</option>
+                            <option value="LV" id="LV">Latvia</option>
+                            <option value="LB" id="LB">Lebanon</option>
+                            <option value="LS" id="LS">Lesotho</option>
+                            <option value="LR" id="LR">Liberia</option>
+                            <option value="LY" id="LY">Libya</option>
+                            <option value="LI" id="LI">Liechtenstein</option>
+                            <option value="LT" id="LT">Lithuania</option>
+                            <option value="LU" id="LU">Luxembourg</option>
+                            <option value="MO" id="MO">Macao</option>
+                            <option value="MK" id="MK">Macedonia, Republic of</option>
+                            <option value="MG" id="MG">Madagascar</option>
+                            <option value="MW" id="MW">Malawi</option>
+                            <option value="MY" id="MY">Malaysia</option>
+                            <option value="MV" id="MV">Maldives</option>
+                            <option value="ML" id="ML">Mali</option>
+                            <option value="MT" id="MT">Malta</option>
+                            <option value="MH" id="MH">Marshall Islands</option>
+                            <option value="MQ" id="MQ">Martinique</option>
+                            <option value="MR" id="MR">Mauritania</option>
+                            <option value="MU" id="MU">Mauritius</option>
+                            <option value="YT" id="YT">Mayotte</option>
+                            <option value="MX" id="MX">Mexico</option>
+                            <option value="FM" id="FM">Micronesia, Federated States of</option>
+                            <option value="MD" id="MD">Moldova, Republic of</option>
+                            <option value="MC" id="MC">Monaco</option>
+                            <option value="MN" id="MN">Mongolia</option>
+                            <option value="ME" id="ME">Montenegro</option>
+                            <option value="MS" id="MS">Montserrat</option>
+                            <option value="MA" id="MA">Morocco</option>
+                            <option value="MZ" id="MZ">Mozambique</option>
+                            <option value="MM" id="MM">Myanmar</option>
+                            <option value="NA" id="NA">Namibia</option>
+                            <option value="NR" id="NR">Nauru</option>
+                            <option value="NP" id="NP">Nepal</option>
+                            <option value="NL" id="NL">Netherlands</option>
+                            <option value="NC" id="NC">New Caledonia</option>
+                            <option value="NZ" id="NZ">New Zealand</option>
+                            <option value="NI" id="NI">Nicaragua</option>
+                            <option value="NE" id="NE">Niger</option>
+                            <option value="NG" id="NG">Nigeria</option>
+                            <option value="NU" id="NU">Niue</option>
+                            <option value="NF" id="NF">Norfolk Island</option>
+                            <option value="MP" id="MP">Northern Mariana Islands</option>
+                            <option value="NO" id="NO">Norway</option>
+                            <option value="OM" id="OM">Oman</option>
+                            <option value="PK" id="PK">Pakistan</option>
+                            <option value="PW" id="PW">Palau</option>
+                            <option value="PS" id="PS">Palestine, State of</option>
+                            <option value="PA" id="PA">Panama</option>
+                            <option value="PG" id="PG">Papua New Guinea</option>
+                            <option value="PY" id="PY">Paraguay</option>
+                            <option value="PE" id="PE">Peru</option>
+                            <option value="PH" id="PH">Philippines</option>
+                            <option value="PN" id="PN">Pitcairn</option>
+                            <option value="PL" id="PL">Poland</option>
+                            <option value="PT" id="PT">Portugal</option>
+                            <option value="PR" id="PR">Puerto Rico</option>
+                            <option value="QA" id="QA">Qatar</option>
+                            <option value="RE" id="RE">Réunion</option>
+                            <option value="RO" id="RO">Romania</option>
+                            <option value="RU" id="RU">Russian Federation</option>
+                            <option value="RW" id="RW">Rwanda</option>
+                            <option value="BL" id="BL">Saint Barthélemy</option>
+                            <option value="SH" id="SH">Saint Helena, Ascension and Tristan da Cunha</option>
+                            <option value="KN" id="KN">Saint Kitts and Nevis</option>
+                            <option value="LC" id="LC">Saint Lucia</option>
+                            <option value="MF" id="MF">Saint Martin (French part)</option>
+                            <option value="PM" id="PM">Saint Pierre and Miquelon</option>
+                            <option value="VC" id="VC">Saint Vincent and the Grenadines</option>
+                            <option value="WS" id="WS">Samoa</option>
+                            <option value="SM" id="SM">San Marino</option>
+                            <option value="ST" id="ST">Sao Tome and Principe</option>
+                            <option value="SA" id="SA">Saudi Arabia</option>
+                            <option value="SN" id="SN">Senegal</option>
+                            <option value="RS" id="RS">Serbia</option>
+                            <option value="SC" id="SC">Seychelles</option>
+                            <option value="SL" id="SL">Sierra Leone</option>
+                            <option value="SG" id="SG">Singapore</option>
+                            <option value="SX" id="SX">Sint Maarten (Dutch part)</option>
+                            <option value="SK" id="SK">Slovakia</option>
+                            <option value="SI" id="SI">Slovenia</option>
+                            <option value="SB" id="SB">Solomon Islands</option>
+                            <option value="SO" id="SO">Somalia</option>
+                            <option value="ZA" id="ZA">South Africa</option>
+                            <option value="GS" id="GS">South Georgia and the South Sandwich Islands</option>
+                            <option value="ES" id="ES">Spain</option>
+                            <option value="LK" id="LK">Sri Lanka</option>
+                            <option value="SD" id="SD">Sudan</option>
+                            <option value="SR" id="SR">Suriname</option>
+                            <option value="SS" id="SS">South Sudan</option>
+                            <option value="SJ" id="SJ">Svalbard and Jan Mayen</option>
+                            <option value="SZ" id="SZ">Swaziland</option>
+                            <option value="SE" id="SE">Sweden</option>
+                            <option value="CH" id="CH">Switzerland</option>
+                            <option value="SY" id="SY">Syrian Arab Republic</option>
+                            <option value="TW" id="TW">Taiwan</option>
+                            <option value="TJ" id="TJ">Tajikistan</option>
+                            <option value="TZ" id="TZ">Tanzania, United Republic of</option>
+                            <option value="TH" id="TH">Thailand</option>
+                            <option value="TL" id="TL">Timor-Leste</option>
+                            <option value="TG" id="TG">Togo</option>
+                            <option value="TK" id="TK">Tokelau</option>
+                            <option value="TO" id="TO">Tonga</option>
+                            <option value="TT" id="TT">Trinidad and Tobago</option>
+                            <option value="TN" id="TN">Tunisia</option>
+                            <option value="TR" id="TR">Turkey</option>
+                            <option value="TM" id="TM">Turkmenistan</option>
+                            <option value="TC" id="TC">Turks and Caicos Islands</option>
+                            <option value="TV" id="TV">Tuvalu</option>
+                            <option value="UG" id="UG">Uganda</option>
+                            <option value="UA" id="UA">Ukraine</option>
+                            <option value="AE" id="AE">United Arab Emirates</option>
+                            <option value="UY" id="UY">Uruguay</option>
+                            <option value="UZ" id="UZ">Uzbekistan</option>
+                            <option value="VU" id="VU">Vanuatu</option>
+                            <option value="VE" id="VE">Venezuela, Bolivarian Republic of</option>
+                            <option value="VN" id="VN">Viet Nam</option>
+                            <option value="VG" id="VG">Virgin Islands, British</option>
+                            <option value="VI" id="VI">Virgin Islands, U.S.</option>
+                            <option value="WF" id="WF">Wallis and Futuna</option>
+                            <option value="EH" id="EH">Western Sahara</option>
+                            <option value="YE" id="YE">Yemen</option>
+                            <option value="ZM" id="ZM">Zambia</option>
+                            <option value="ZW" id="ZW">Zimbabwe</option>
+                        </select>
+                    </div>
+                    <div class="col-12 col-md-2">
+                        <select name="units" id="units" class="form-select" aria-label="Default select example">
+                            <option value=""> Select Units</option>
+                            <option value="Fahrenheit" id="Fahrenheit">Fahrenheit (Default)</option>
+                            <option value="Celsius" id="Celsius">Celsius</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="container d-flex justify-content-center mt-5">
+                    <button type="submit" class="btn btn-secondary px-4 px-md-5 mx-2" id="getBtn">Get Weather</button>
+                    <button type="button" class="btn btn-secondary px-5 mx-4" onclick="clearScreen()">Clear</button>
+                </div>
+            </form>
+        </div>
+        <div class="container" id="display">
+            <div class="row d-flex justify-content-center">
+                <h2 id="location"></h2>
+            </div>
+            <div class="row d-flex justify-content-center my-5">
+                <div class="card text-white bg-dark" style="width: 30rem;">
+                    <img id= "img0" src="" class="card-img-top border-bottom" alt="...">
+                    <div class="card-body">
+                        <div class="row d-flex justify-content-center my-3">
+                            <div class="col-5" id="current0"></div>
+                            <div class="col-5" id="feels0"></div>
+                        </div>
+                        <div class="row d-flex justify-content-center my-3">
+                            <div class="col-5" id="high0"></div>
+                            <div class="col-5" id="low0"></div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-12 d-flex justify-content-center">
+                                <p id="desc0"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row d-flex justify-content-center my-5" id="forcast">
+                <h2 class="text-center">5 Day Forecast</h2>
+                <div class="row row-cols-1 row-cols-md-5 g-4">
+                    <div class="col">
+                        <div class="card text-white bg-dark" style="width: 15rem;">
+                            <img id= "img1" src="" class="card-img-top " alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title text-center" id="day1"></h5>
+                                <div class="row mt-4 text-center">
+                                    <div class="col-6">High: </div>
+                                    <div class="col-6" id="high1"></div>
+                                </div>
+                                <div class="row mt-4 text-center">
+                                    <div class="col-6">Low: </div>
+                                    <div class="col-6" id="low1"></div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-12 text-center" id="desc1"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card text-white bg-dark" style="width: 15rem;">
+                            <img id= "img2" src="" class="card-img-top " alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title text-center" id="day2"></h5>
+                                <div class="row mt-4 text-center">
+                                    <div class="col-6">High: </div>
+                                    <div class="col-6" id="high2"></div>
+                                </div>
+                                <div class="row mt-4 text-center">
+                                    <div class="col-6">Low: </div>
+                                    <div class="col-6" id="low2"></div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-12 text-center" id="desc2"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card text-white bg-dark" style="width: 15rem;">
+                            <img id= "img3" src="" class="card-img-top " alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title text-center" id="day3"></h5>
+                                <div class="row mt-4 text-center">
+                                    <div class="col-6">High: </div>
+                                    <div class="col-6" id="high3"></div>
+                                </div>
+                                <div class="row mt-4 text-center">
+                                    <div class="col-6">Low: </div>
+                                    <div class="col-6" id="low3"></div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-12 text-center" id="desc3"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card text-white bg-dark" style="width: 15rem;">
+                            <img id= "img4" src="" class="card-img-top " alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title text-center" id="day4"></h5>
+                                <div class="row mt-4 text-center">
+                                    <div class="col-6">High: </div>
+                                    <div class="col-6" id="high4"></div>
+                                </div>
+                                <div class="row mt-4 text-center">
+                                    <div class="col-6">Low: </div>
+                                    <div class="col-6" id="low4"></div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-12 text-center" id="desc4"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card text-white bg-dark" style="width: 15rem;">
+                            <img id= "img5" src="" class="card-img-top " alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title text-center" id="day5"></h5>
+                                <div class="row mt-4 text-center">
+                                    <div class="col-6">High: </div>
+                                    <div class="col-6" id="high5"></div>
+                                </div>
+                                <div class="row mt-4 text-center">
+                                    <div class="col-6">Low: </div>
+                                    <div class="col-6" id="low5"></div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-12 text-center" id="desc5"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+        </div>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script>
+    </body>
+</html>

@@ -1,0 +1,16 @@
+body{
+    background-image: url(/images/2102.i518.007_sky_cloud_summer_landscape.jpg);
+    background-repeat: no-repeat;
+}
+
+header{
+    color: black;
+}
+
+.card-text{
+    font-size:x-large;
+}
+
+.card-img-top{
+    object-fit:fill;
+}
