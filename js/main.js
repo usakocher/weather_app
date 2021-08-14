@@ -1,7 +1,8 @@
-import { apiToken, locToken } from "./guard.js";
+import { apiToken, locToken, revToken } from "./guard.js";
 
 var lat;
 var lon;
+var city;
 
 var keys = [0,1,2,3,4,5,6];
 var values = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -45,14 +46,25 @@ const getLocation = async () => {
     }
 }
 
+const getCity = async (coords) => {
+    lat = coords[0];
+    lon = coords[1];;
+    const temp = await fetch(`https://us1.locationiq.com/v1/reverse.php?key=${revToken}&lat=${lat}&lon=${lon}&format=json`, {
+        method: 'GET'
+    });
+    const name = await temp.json();
+    return name.address.city
+};
+
 const fetchData = async (zip, code) => {
     if(code == 'GB'){
             const gbLocation = await fetch(`http://api.postcodes.io/postcodes/${zip}`, {
                 method: 'GET'
             });
             const locale = await gbLocation.json()
-            lat = locale.result.latitude
-            lon = locale.result.longitude
+            lat = locale.result.latitude;
+            lon = locale.result.longitude;
+            city = locale.result.admin_district;
         }else{
             const location = await fetch(`https://thezipcodes.com/api/v1/search?zipCode=${zip}&countryCode=${code}&apiKey=b7ac516e81fc5dd06dd77938dba59cad`, { json: true }, (err, res, body) => {
                 if (err) { return console.log(err); }
@@ -60,8 +72,9 @@ const fetchData = async (zip, code) => {
             const locData = await location.json();
             lat = locData.location[0].latitude;
             lon = locData.location[0].longitude;
-        }    
-    return [lat, lon]
+            city = locData.location[0].city;
+        }
+    return [lat, lon, city]
 };
 
 let form = document.querySelector('#infoDataForm')
@@ -70,16 +83,19 @@ form.addEventListener('submit', async (event) => {
     event.preventDefault()
     document.getElementById('display').style.display = 'block'
     var coords;
+    var stuff
     let zipPostal = event.path[0][0].value;
     let countryCode = event.path[0][1].value;
     let units = event.path[0][2].value;
     if(zipPostal == "" && countryCode == ""){
-        let stuff = await getLocation();
-        coords = [stuff.lat, stuff.lon]
+        stuff = await getLocation();
+        city = await getCity([stuff.lat, stuff.lon])
+        coords = [stuff.lat, stuff.lon, city]
     }else{
         coords = await fetchData(zipPostal, countryCode);
     }
     let data = await getData(coords);
+    document.getElementById("location").innerHTML = `Weather for ${coords[2]}`
     if(data.alerts){
         alert(`There is a weather alert for this area:\n ${data.alerts[0].description}`)
     }
@@ -125,9 +141,10 @@ form.addEventListener('submit', async (event) => {
     
 })
 
-const clearScreen = () => {
+const btn = document.getElementById("clearBtn");
+btn.addEventListener("click", function() {
     document.getElementById('display').style.display = 'none'
     document.getElementById('post').value = ''
     document.getElementById('country-code-field').value = ''
     document.getElementById('units').value = ''
-}
+}, false)
