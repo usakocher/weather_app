@@ -1,5 +1,5 @@
-const apiToken = 'ffe326f396521129f55388a8313ab948';
-const locToken = 'b7ac516e81fc5dd06dd77938dba59cad';
+import { apiToken, locToken } from "./guard.js";
+
 var lat;
 var lon;
 
@@ -74,7 +74,7 @@ form.addEventListener('submit', async (event) => {
     let countryCode = event.path[0][1].value;
     let units = event.path[0][2].value;
     if(zipPostal == "" && countryCode == ""){
-        stuff = await getLocation();
+        let stuff = await getLocation();
         coords = [stuff.lat, stuff.lon]
     }else{
         coords = await fetchData(zipPostal, countryCode);
