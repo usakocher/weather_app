@@ -17,7 +17,7 @@ for postal codes, and a separate one for everything else.<br>
 If the user leaves those fields blank, the program makes a protected call to an API to return the user's location. It then uses those coordinates to obtain
 the city name from another API.<br>
 Finally, when the correct coordinates are obtained, it sends those out the weather API to return the weather data.<br>
-The program then displays the city name, and the weather information to the user.
+The program then displays the city name, and the weather information to the user. It will also show a pop up if there are any weather alerts for the target area.
 
 ## Known Issues
 There is no server-side validation in this program. Therefore, the program will fail when trying to obtain the coordinates. The app will continue and can still be
