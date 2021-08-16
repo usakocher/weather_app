@@ -100,7 +100,7 @@ const fetchData = async (zip, code) => {
             lon = locale.result.longitude;
             city = locale.result.admin_district;
         }else{
-            const location = await fetch(`https://thezipcodes.com/api/v1/search?zipCode=${zip}&countryCode=${code}&apiKey=b7ac516e81fc5dd06dd77938dba59cad`, { json: true }, (err, res, body) => {
+            const location = await fetch(`https://thezipcodes.com/api/v1/search?zipCode=${zip}&countryCode=${code}&apiKey=${locToken}`, { json: true }, (err, res, body) => {
                 if (err) { return console.log(err); }
             });
             const locData = await location.json();
