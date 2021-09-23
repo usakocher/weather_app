@@ -5,7 +5,8 @@ We were asked to create a website, using API calls, that took in user inputs and
 
 ## Program Design
 This program will take in a zip or postal code, and a country selection, and return the current weather in that location, along with a 5 Day Forecast.
-If a user wants the local weather, they can just hit the button and it'll pull the location from the device.
+If a user wants the local weather, they can just hit the button and it'll pull the location from the device. The app will also provide a pop up alert 
+if the region searched has any weather advisories.
 
 ## Assumptions
 The assumption made for this app was that anyone getting local data from a device's location would be located in the US.
